@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class Book {
-        private String name;
-        private int imageId;
+    public static class Book {
+        private final String name;
+        private final int imageId;
 
         public Book(String name, int imageId) {
             this.name = name;
@@ -62,22 +62,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    ArrayList getListBooks(){
+    public ArrayList getListBooks(){
         return mainStringSet;
     }
 
-    public class MainRecycleViewAdapter extends RecyclerView.Adapter<MainRecycleViewAdapter.ViewHolder> {
+    public static class MainRecycleViewAdapter extends RecyclerView.Adapter<MainRecycleViewAdapter.ViewHolder> {
 
-        private ArrayList<Book> localDataSet;
+        private final ArrayList<Book> localDataSet;
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView textView;
-            ImageView imageview;
+        public static final class ViewHolder extends RecyclerView.ViewHolder {
+            private final TextView textView;
+            private final ImageView imageview;
 
             public ViewHolder(View view) {
                 super(view);
-                textView = (TextView) view.findViewById(R.id.text_view_book_title);
-                imageview = (ImageView) view.findViewById(R.id.image_view_book_cover);
+                textView = view.findViewById(R.id.text_view_book_title);
+                imageview = view.findViewById(R.id.image_view_book_cover);
+            }
+            public TextView getTextView(){
+                return textView;
+            }
+            public ImageView getImageView(){
+                return imageview;
             }
         }
 
@@ -99,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             viewHolder.textView.setText(book.getTitle());
         }
 
-        // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
             return localDataSet.size();
