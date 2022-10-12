@@ -1,10 +1,11 @@
 package com.com.jnu.recycleview;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -14,9 +15,8 @@ import android.view.ViewGroup;
 //import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
+//import android.widget.Toast;
+import com.com.jnu.recycleview.data.Book;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MENU_ID_ADD =1;
     private static final int MENU_ID_UPDATE =2;
     private static final int MENU_ID_DELETE =3;
-    public ArrayList<Book> mainStringSet;
+    public ArrayList<Book> books;
+    private MainRecycleViewAdapter mainRecycleViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +38,16 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewMain.setLayoutManager(linearLayoutManager);
 
-        mainStringSet = new ArrayList<>();
-        for (int i = 1; i < 100; ++i) {
+        books = new ArrayList<>();
+        for (int i = 1; i < 20; ++i) {
             Book a = new Book("软件项目管理案例教程（第4版）", R.drawable.book_2);
-            mainStringSet.add(a);
+            books.add(a);
             Book b = new Book("创新工程实践", R.drawable.book_no_name);
-            mainStringSet.add(b);
+            books.add(b);
             Book c = new Book("信息安全数学基础（第2版）", R.drawable.book_1);
-            mainStringSet.add(c);
+            books.add(c);
         }
-        MainRecycleViewAdapter mainRecycleViewAdapter = new MainRecycleViewAdapter(mainStringSet);
+        mainRecycleViewAdapter = new MainRecycleViewAdapter(books);
         recyclerViewMain.setAdapter(mainRecycleViewAdapter);
 
     }
@@ -56,41 +57,49 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case MENU_ID_ADD:
-                Toast.makeText(this,"item add" +item.getOrder()+" clicked!",Toast.LENGTH_LONG)
-                        .show();
+                int i=item.getOrder();
+                if(i%3==0)
+                {
+                    books.add(item.getOrder(), new Book("软件项目管理案例教程（第4版）", R.drawable.book_2));
+                }
+                else if(i%2==0)
+                {
+                    books.add(item.getOrder(),new Book("信息安全数学基础（第2版）", R.drawable.book_1));
+                }
+                else
+                {
+                    books.add(item.getOrder(), new Book("创新工程实践", R.drawable.book_no_name));
+                }
+                mainRecycleViewAdapter.notifyItemInserted(item.getOrder());
                 break;
             case MENU_ID_UPDATE:
-                Toast.makeText(this,"item update " +item.getOrder()+" clicked!",Toast.LENGTH_LONG)
-                        .show();
+                books.get(item.getOrder()).setTitle(getString(R.string.update));
+                mainRecycleViewAdapter.notifyItemChanged(item.getOrder());
                 break;
             case MENU_ID_DELETE:
-                Toast.makeText(this,"item delete " +item.getOrder()+" clicked!",Toast.LENGTH_LONG)
-                        .show();
+                AlertDialog alertDialog=new AlertDialog.Builder(this)
+                        .setTitle(R.string.confirmation)
+                        .setMessage(R.string.sure_to_delete)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                books.remove(item.getOrder());
+                                mainRecycleViewAdapter.notifyItemRemoved(item.getOrder());
+                            }
+                        }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).create();
+                alertDialog.show();
                 break;
         }
         return super.onContextItemSelected(item);
     }
 
-    public static class Book {
-        private final String name;
-        private final int imageId;
-
-        public Book(String name, int imageId) {
-            this.name = name;
-            this.imageId = imageId;
-        }
-
-        public String getTitle() {
-            return name;
-        }
-
-        public int getCoverResourceId() {
-            return imageId;
-        }
-    }
-
     public  ArrayList<Book> getListBooks(){
-        return mainStringSet;
+        return books;
     }
 
     public static class MainRecycleViewAdapter extends RecyclerView.Adapter<MainRecycleViewAdapter.ViewHolder> {
@@ -107,12 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 imageview = view.findViewById(R.id.image_view_book_cover);
 
                 view.setOnCreateContextMenuListener(this);
-            }
-            public TextView getTextView(){
-                return textView;
-            }
-            public ImageView getImageView(){
-                return imageview;
             }
 
             @Override
@@ -140,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             Book book = localDataSet.get(position);
             viewHolder.imageview.setImageResource(book.getCoverResourceId());
             viewHolder.textView.setText(book.getTitle());
-
         }
 
         @Override
