@@ -2,7 +2,10 @@
     <string name="app_name">RecycleView</string>
     <string name="confirmation">Confirmation</string>
     <string name="sure_to_delete">Are you sure to delete the item?</string>
-    <string name="update">the book updated!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="new_title">Title</string>
+    <string name="input_name">Name</string>
+    <string name="button_ok">OK</string>
+    <string name="update">the book updated!</string>
 </resources>

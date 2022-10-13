@@ -1,21 +1,21 @@
 package com.com.jnu.recycleview;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-//import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-//import android.widget.Toast;
 import com.com.jnu.recycleview.data.Book;
 import java.util.ArrayList;
 
@@ -26,6 +26,21 @@ public class MainActivity extends AppCompatActivity {
     private static final int MENU_ID_DELETE =3;
     public ArrayList<Book> books;
     private MainRecycleViewAdapter mainRecycleViewAdapter;
+
+    private final ActivityResultLauncher<Intent> addDataLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result->{
+        if(null!=result){
+            Intent intent=result.getData();
+            if(result.getResultCode()!=InputShopItemActivity.RESULT_CODE_SUCCESS)
+            {
+                assert intent != null;
+                Bundle bundle=intent.getExtras();
+                String title=bundle.getString("title");
+                books.add(1, new Book(title,R.drawable.ic_launcher_background));
+                mainRecycleViewAdapter.notifyItemInserted(1);
+            }
+        }
+    } );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +72,8 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case MENU_ID_ADD:
-                int i=item.getOrder();
-                if(i%3==0)
-                {
-                    books.add(item.getOrder(), new Book("软件项目管理案例教程（第4版）", R.drawable.book_2));
-                }
-                else if(i%2==0)
-                {
-                    books.add(item.getOrder(),new Book("信息安全数学基础（第2版）", R.drawable.book_1));
-                }
-                else
-                {
-                    books.add(item.getOrder(), new Book("创新工程实践", R.drawable.book_no_name));
-                }
-                mainRecycleViewAdapter.notifyItemInserted(item.getOrder());
+                Intent intent=new Intent(this, InputShopItemActivity.class);
+                addDataLauncher.launch(intent);
                 break;
             case MENU_ID_UPDATE:
                 books.get(item.getOrder()).setTitle(getString(R.string.update));
@@ -80,17 +83,11 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog alertDialog=new AlertDialog.Builder(this)
                         .setTitle(R.string.confirmation)
                         .setMessage(R.string.sure_to_delete)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                books.remove(item.getOrder());
-                                mainRecycleViewAdapter.notifyItemRemoved(item.getOrder());
-                            }
-                        }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                            books.remove(item.getOrder());
+                            mainRecycleViewAdapter.notifyItemRemoved(item.getOrder());
+                        }).setNegativeButton(R.string.no, (dialog, which) -> {
 
-                            }
                         }).create();
                 alertDialog.show();
                 break;
