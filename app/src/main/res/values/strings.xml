@@ -5,7 +5,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="new_title">Title</string>
-    <string name="input_name">Name</string>
+    <string name="new_name">Name</string>
     <string name="button_ok">OK</string>
     <string name="update">the book updated!</string>
+
 </resources>

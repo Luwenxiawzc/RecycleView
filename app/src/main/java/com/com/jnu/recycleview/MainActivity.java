@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                             books.remove(item.getOrder());
                             mainRecycleViewAdapter.notifyItemRemoved(item.getOrder());
                         }).setNegativeButton(R.string.no, (dialog, which) -> {
-
                         }).create();
                 alertDialog.show();
                 break;
@@ -126,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         public MainRecycleViewAdapter(ArrayList<Book> dataSet) {
             localDataSet = dataSet;
         }
-
 
         @Override
         @NonNull
