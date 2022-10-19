@@ -7,31 +7,37 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal"
-        >
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
         <TextView
             android:id="@+id/textViewTile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_title"
-            tools:layout_editor_absoluteX="97dp"
-            tools:layout_editor_absoluteY="225dp" />
-
+            android:text="@string/new_title" />//图书名称
         <EditText
             android:id="@+id/edittext_shop_item_title"
-            android:layout_width="101dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:autofillHints="name"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/new_name"
-            tools:layout_editor_absoluteX="165dp"
-            tools:layout_editor_absoluteY="217dp" />
+            tools:ignore="LabelFor" />//输入新的图书名称
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
         <Button
-            android:id="@+id/button_ok"
+            android:id="@+id/button_确定"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_ok">
+            android:text="@string/button_确定">//确定按钮
         </Button>
+        <Button
+            android:id="@+id/button_取消"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/button_取消">//取消按钮A
+        </Button>
+    </LinearLayout>
 </LinearLayout>

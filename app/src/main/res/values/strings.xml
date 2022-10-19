@@ -6,7 +6,8 @@
     <string name="no">No</string>
     <string name="new_title">Title</string>
     <string name="new_name">Name</string>
-    <string name="button_ok">OK</string>
+    <string name="button_确定">确定</string>
+    <string name="button_取消">取消</string>
     <string name="update">the book updated!</string>
 
 </resources>
