@@ -1,6 +1,8 @@
 package com.com.jnu.recycleview.data;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable{//对象序列化
     public Book(String title,int coverResourceId) {
         Title = title;
         CoverResourceId = coverResourceId;

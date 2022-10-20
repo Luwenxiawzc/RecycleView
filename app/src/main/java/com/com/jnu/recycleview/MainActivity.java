@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.com.jnu.recycleview.data.Book;
+import com.com.jnu.recycleview.data.DataSaver;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         String title=bundle.getString("title");//获得传回的新的title
                         int position=bundle.getInt("position");//获得传回的当前数据的位置
                         books.add(position, new Book(title,R.drawable.book_no_name));//添加一个新的Book
+                        new DataSaver().Save(this,books);//数据保存
                         mainRecycleViewAdapter.notifyItemInserted(position);//通知适配器数据增加
                     }
                 }
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         String title=bundle.getString("title");//获得传回的新的title
                         int position=bundle.getInt("position");//获得传回的当前数据的位置
                         books.get(position).setTitle(title);//修改title为传回的新的title
+                        new DataSaver().Save(this,books);//数据保存
                         mainRecycleViewAdapter.notifyItemChanged(position);//通知适配器数据更改
                     }
                 }
@@ -69,8 +73,11 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//垂直
         recyclerViewMain.setLayoutManager(linearLayoutManager);
 
+        DataSaver dataSaver=new DataSaver();
+        books=dataSaver.Load(this);
+
         books = new ArrayList<>();
-        for (int i = 1; i < 20; ++i) {
+        for (int i = 1; i < 2; ++i) {
             Book a = new Book("软件项目管理案例教程（第4版）", R.drawable.book_2);
             books.add(a);
             Book b = new Book("创新工程实践", R.drawable.book_no_name);
@@ -104,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(R.string.sure_to_delete)
                         .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                             books.remove(item.getOrder());
+                            new DataSaver().Save(MainActivity.this,books);//数据保存
                             mainRecycleViewAdapter.notifyItemRemoved(item.getOrder());
                         }).setNegativeButton(R.string.no, (dialog, which) -> {
                         }).create();

@@ -37,7 +37,7 @@ public class EditBookActivity extends AppCompatActivity {
                 bundle.putInt("position",position);//传回当前位置
 
                 intent.putExtras(bundle);
-                setResult(RESULT_CODE_SUCCESS, intent);
+                setResult(RESULT_CODE_SUCCESS, intent);//结果码
                 EditBookActivity.this.finish();//记得关闭当前的activity
             }
         });
