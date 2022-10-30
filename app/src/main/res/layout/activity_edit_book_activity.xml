@@ -13,7 +13,7 @@
             android:id="@+id/textViewTile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_title" />//图书名称
+            android:text="@string/new_title" />
         <EditText
             android:id="@+id/edittext_shop_item_title"
             android:layout_width="300dp"
@@ -22,7 +22,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/new_name"
-            tools:ignore="LabelFor" />//输入新的图书名称
+            tools:ignore="LabelFor" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,13 +31,13 @@
             android:id="@+id/button_确定"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_确定">//确定按钮
+            android:text="@string/button_确定">
         </Button>
         <Button
             android:id="@+id/button_取消"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/button_取消">//取消按钮A
+            android:text="@string/button_取消">
         </Button>
     </LinearLayout>
 </LinearLayout>
