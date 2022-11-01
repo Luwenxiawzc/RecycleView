@@ -9,5 +9,8 @@
     <string name="button_确定">确定</string>
     <string name="button_取消">取消</string>
     <string name="update">the book updated!</string>
+    <string name="tab_caption_0_图书">图书</string>
+    <string name="tab_caption_1_新闻">新闻</string>
+    <string name="tab_caption_2_卖家">卖家</string>
 
 </resources>

@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.com.jnu.recycleview">
 
+    <uses-permission android:name="android.permission.INTERNET"><!--网络访问权限-->
+
+    </uses-permission>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
