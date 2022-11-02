@@ -85,7 +85,7 @@ public class BookFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView=inflater.inflate(R.layout.fragment_book, container, false);
+        View rootView=inflater.inflate(R.layout.fragment_book, container, false);//布局解析器
         RecyclerView recyclerViewMain = rootView.findViewById(R.id.recycle_view_books);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
@@ -95,14 +95,15 @@ public class BookFragment extends Fragment {
         DataSaver dataSaver=new DataSaver();
         books=dataSaver.Load(this.getContext());
 
-        books = new ArrayList<>();
-        for (int i = 1; i < 2; ++i) {
-            Book a = new Book("软件项目管理案例教程（第4版）", R.drawable.book_2);
-            books.add(a);
-            Book b = new Book("创新工程实践", R.drawable.book_no_name);
-            books.add(b);
-            Book c = new Book("信息安全数学基础（第2版）", R.drawable.book_1);
-            books.add(c);
+        if(books.size()==0) {
+            for (int i = 1; i < 2; ++i) {
+                Book a = new Book("软件项目管理案例教程（第4版）", R.drawable.book_2);
+                books.add(a);
+                Book b = new Book("创新工程实践", R.drawable.book_no_name);
+                books.add(b);
+                Book c = new Book("信息安全数学基础（第2版）", R.drawable.book_1);
+                books.add(c);
+            }
         }
         mainRecycleViewAdapter = new MainRecycleViewAdapter(books);
         recyclerViewMain.setAdapter(mainRecycleViewAdapter);
