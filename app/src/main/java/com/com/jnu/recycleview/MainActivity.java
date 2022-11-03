@@ -28,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
                      return BookFragment.newInstance();//不能先创建一个Fragment的list,然后再返回，要在里面创建
                  case 1:
                      return WebViewFragment.newInstance();
+                 case 2:
+                     return MapViewFragment.newInstance();
              }
-            return WebViewFragment.newInstance();
+            return BookFragment.newInstance();
         }      //获得Tab对应的Fragment
 
         @Override
