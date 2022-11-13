@@ -35,6 +35,7 @@ android {
 dependencies {
 
     implementation 'com.baidu.lbsyun:BaiduMapSDK_Map:7.4.0'
+    //在此可以引入拍照、扫码等的库，是别人已经写好了的
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
