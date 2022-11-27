@@ -89,7 +89,7 @@ public class MapViewFragment extends Fragment {
     private void AddMarkersOnMap(List<ShopLocation> locations) {
         BitmapDescriptor bitmap= BitmapDescriptorFactory.fromResource(R.drawable.locate);//图标型标记
         for (ShopLocation shop: locations) {
-            LatLng shopPoint = new LatLng(shop.getLatitude(),shop.getLongitude());
+            LatLng shopPoint = new LatLng(shop.getLatitude(),shop.getLongitude());//设置经纬度
 
             OverlayOptions options = new MarkerOptions().position(shopPoint).icon(bitmap);
             //将maker添加到地图

@@ -42,7 +42,7 @@ public class HttpDataLoader {
     }
 
     @NonNull
-    public List<ShopLocation> ParseJsonData(String JsonText)//解析Josn数据
+    public List<ShopLocation> ParseJsonData(String JsonText)//解析Josn数据（解析度是已经下载的string）
     {
         List<ShopLocation> locations=new ArrayList<>();
         try {

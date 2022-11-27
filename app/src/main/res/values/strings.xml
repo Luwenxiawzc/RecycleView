@@ -1,4 +1,4 @@
-<resources>
+<resources >
     <string name="app_name">RecycleView</string>
     <string name="confirmation">Confirmation</string>
     <string name="sure_to_delete">Are you sure to delete the item?</string>
@@ -12,5 +12,7 @@
     <string name="tab_caption_0_图书">图书</string>
     <string name="tab_caption_1_新闻">新闻</string>
     <string name="tab_caption_2_卖家">卖家</string>
+    <string name="tab_caption_3_游戏">游戏</string>
 
 </resources>
+<!--tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools"-->

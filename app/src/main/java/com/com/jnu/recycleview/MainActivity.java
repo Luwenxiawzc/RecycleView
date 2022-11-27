@@ -30,13 +30,15 @@ public class MainActivity extends AppCompatActivity {
                      return WebViewFragment.newInstance();
                  case 2:
                      return MapViewFragment.newInstance();
+                 case 3:
+                     return GameFragment.newInstance();
              }
             return BookFragment.newInstance();
         }      //获得Tab对应的Fragment
 
         @Override
         public int getItemCount() {
-            return 3;
+            return 4;
         }    //Tab数目
     }
     @Override
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         tab.setText(R.string.tab_caption_2_卖家);
+                        break;
+                    case 3:
+                        tab.setText(R.string.tab_caption_3_游戏);
                         break;
                 }
             }
